@@ -4,6 +4,7 @@ namespace Sichikawa\LaravelSendgridDriver\Transport;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Swift_Attachment;
+use Swift_Image;
 use Swift_Mime_Message;
 use Swift_MimePart;
 
@@ -155,6 +156,14 @@ class SendgridTransport extends Transport
     protected function setSmtpApi(Swift_Mime_Message $message)
     {
         // TODO
+        foreach ($message->getChildren() as $attachment) {
+            if (!$attachment instanceof Swift_Image
+                || !in_array(self::SMTP_API_NAME, [$attachment->getFilename(), $attachment->getContentType()])
+            ) {
+                continue;
+            }
+            $smtp_api = $attachment->getBody();
+        }
     }
 
 }
