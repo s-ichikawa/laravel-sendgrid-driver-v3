@@ -162,7 +162,7 @@ class SendgridTransport extends Transport
             ) {
                 continue;
             }
-            $smtp_api = $attachment->getBody();
+//            $smtp_api = $attachment->getBody();
         }
     }
 
