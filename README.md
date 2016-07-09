@@ -35,20 +35,6 @@ Remove the default service provider and add the sendgrid service provider in con
 ];
 ```
 
-#Install (Laravel5.0)
-
-Add the package to your composer.json and run composer update.
-```json
-"require": {
-    "s-ichikawa/laravel-sendgrid-driver": "5.0.x-dev"
-},
-```
-
-or installed with composer
-```
-$ composer require s-ichikawa/laravel-sendgrid-driver:5.0.x-dev
-```
-
 Remove the default service provider and add the sendgrid service provider in config/app.php:
 ```php
 'providers' => [
