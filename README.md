@@ -17,13 +17,13 @@ Please make it [Here](https://app.sendgrid.com/settings/api_keys).
 Add the package to your composer.json and run composer update.
 ```json
 "require": {
-    "s-ichikawa/laravel-sendgrid-driver": "dev-master"
+    "s-ichikawa/laravel-sendgrid-driver": "^v5.1"
 },
 ```
 
 or installed with composer
 ```
-$ composer require s-ichikawa/laravel-sendgrid-driver:dev-master
+$ composer require s-ichikawa/laravel-sendgrid-driver
 ```
 
 Remove the default service provider and add the sendgrid service provider in config/app.php:
