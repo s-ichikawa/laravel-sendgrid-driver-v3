@@ -159,7 +159,7 @@ class SendgridTransport extends Transport
      */
     protected function setSmtpApi(Swift_Mime_Message $message, $data)
     {
-        $smtp_api = null;
+        $smtp_api = [];
         foreach ($message->getChildren() as $attachment) {
             if (!$attachment instanceof Swift_Image
                 || !in_array(self::SMTP_API_NAME, [$attachment->getFilename(), $attachment->getContentType()])

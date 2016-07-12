@@ -96,10 +96,7 @@ and, set 'sendgrid/x-smtpapi' to data name or content-type.
         ->to('foo@example.com', 'foo_name')
         ->from('bar@example.com', 'bar_name')
         ->embedData([
-            'category' => 'user_group1',
-            'unique_args' => [
-                'user_id' => 123
-            ]
+            'categories' => ['user_group1']
         ], 'sendgrid/x-smtpapi');
 });
 ```
