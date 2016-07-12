@@ -46,6 +46,8 @@ class SendgridTransport extends Transport
             $data['attachments'] = $attachments;
         }
 
+        $data = $this->setSmtpApi($message, $data);
+
         $payload['json'] = $data;
         return $this->client->post('https://api.sendgrid.com/v3/mail/send', $payload);
     }
@@ -152,9 +154,10 @@ class SendgridTransport extends Transport
      * Set Sendgrid SMTP API
      *
      * @param Swift_Mime_Message $message
+     * @param array $data
      * @return null|string
      */
-    protected function setSmtpApi(Swift_Mime_Message $message)
+    protected function setSmtpApi(Swift_Mime_Message $message, $data)
     {
         $smtp_api = null;
         foreach ($message->getChildren() as $attachment) {
@@ -165,7 +168,10 @@ class SendgridTransport extends Transport
             }
             $smtp_api = $attachment->getBody();
         }
-        return $smtp_api;
+        foreach ($smtp_api as $key => $val) {
+            array_set($data, $key, $val);
+        }
+        return $data;
     }
 
 }
