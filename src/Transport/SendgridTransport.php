@@ -12,11 +12,13 @@ class SendgridTransport extends Transport
 {
     const MAXIMUM_FILE_SIZE = 7340032;
     const SMTP_API_NAME = 'sendgrid/x-smtpapi';
+    const BASE_URL = 'https://api.sendgrid.com/v3/mail/send';
 
     private $client;
     private $options;
+    private $pretend;
 
-    public function __construct(ClientInterface $client, $api_key)
+    public function __construct(ClientInterface $client, $api_key, $pretend = false)
     {
         $this->client = $client;
         $this->options = [
@@ -25,6 +27,7 @@ class SendgridTransport extends Transport
                 'Content-Type'  => 'application/json',
             ],
         ];
+        $this->pretend = $pretend;
     }
 
     /**
@@ -49,6 +52,10 @@ class SendgridTransport extends Transport
         $data = $this->setSmtpApi($message, $data);
 
         $payload['json'] = $data;
+
+        if ($this->pretend) {
+            return [self::BASE_URL, $payload];
+        }
         return $this->client->post('https://api.sendgrid.com/v3/mail/send', $payload);
     }
 

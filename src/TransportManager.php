@@ -16,6 +16,7 @@ class TransportManager extends \Illuminate\Mail\TransportManager
     {
         $config = $this->app['config']->get('services.sendgrid', []);
         $client = new Client(Arr::get($config, 'guzzle', []));
-        return new SendgridTransport($client, $config['api_key']);
+        $pretend = isset($config['pretend']) ? $config['pretend'] : false;
+        return new SendgridTransport($client, $config['api_key'], $pretend);
     }
 }
