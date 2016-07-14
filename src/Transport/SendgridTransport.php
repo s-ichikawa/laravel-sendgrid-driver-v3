@@ -175,6 +175,11 @@ class SendgridTransport extends Transport
             }
             $smtp_api = $attachment->getBody();
         }
+
+        if (!is_array($smtp_api)) {
+            return $data;
+        }
+
         foreach ($smtp_api as $key => $val) {
             array_set($data, $key, $val);
         }
